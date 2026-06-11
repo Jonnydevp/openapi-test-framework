@@ -32,11 +32,12 @@ class DynamicTestFactoryTest : StringSpec({
         responseBody.write(bytes)
     }
 
-    "фабрика строит smoke + contract тесты по числу эндпоинтов" {
+    "фабрика строит smoke + contract + fuzz тесты по числу эндпоинтов" {
         val factory = DynamicTestFactory(spec, ApiClient("http://127.0.0.1:1"))
         factory.smokeTests() shouldHaveSize spec.endpoints.size
         factory.contractTests() shouldHaveSize spec.endpoints.size
-        factory.allTests() shouldHaveSize spec.endpoints.size * 2
+        factory.fuzzTests() shouldHaveSize spec.endpoints.size
+        factory.allTests() shouldHaveSize spec.endpoints.size * 3
     }
 
     "против корректного мока все smoke и contract тесты проходят" {
