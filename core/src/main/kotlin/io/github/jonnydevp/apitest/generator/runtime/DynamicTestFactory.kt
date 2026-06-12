@@ -2,6 +2,7 @@ package io.github.jonnydevp.apitest.generator.runtime
 
 import io.github.jonnydevp.apitest.execution.ApiClient
 import io.github.jonnydevp.apitest.generator.ContractGen
+import io.github.jonnydevp.apitest.generator.FuzzGen
 import io.github.jonnydevp.apitest.generator.GeneratedTest
 import io.github.jonnydevp.apitest.generator.SmokeGen
 import io.github.jonnydevp.apitest.spec.model.ApiSpec
@@ -20,7 +21,10 @@ class DynamicTestFactory(
 
     fun contractTests(): List<DynamicTest> = ContractGen.generate(spec.endpoints).toDynamicTests()
 
-    fun allTests(): List<DynamicTest> = smokeTests() + contractTests()
+    fun fuzzTests(iterations: Int = FuzzGen.DEFAULT_ITERATIONS): List<DynamicTest> =
+        FuzzGen.generate(spec.endpoints, iterations).toDynamicTests()
+
+    fun allTests(): List<DynamicTest> = smokeTests() + contractTests() + fuzzTests()
 
     private fun List<GeneratedTest>.toDynamicTests(): List<DynamicTest> =
         map { test -> DynamicTest.dynamicTest(test.name) { test.execute(client) } }
