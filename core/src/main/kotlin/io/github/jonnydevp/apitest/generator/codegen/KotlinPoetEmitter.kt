@@ -16,11 +16,7 @@ import io.github.jonnydevp.apitest.util.jackson
 import java.nio.file.Path
 import kotlin.io.path.createDirectories
 
-/**
- * Кодогенерация: из [ApiSpec] эмитит человекочитаемые `.kt`-файлы с JUnit 5 + REST Assured
- * smoke-тестами — по одному тест-классу на тег API. В отличие от runtime-режима, здесь
- * получаются обычные исходники, которые можно открыть, прочитать и закоммитить.
- */
+/** Кодогенерация: из [ApiSpec] эмитит человекочитаемые `.kt`-файлы с JUnit 5 + REST Assured smoke-тестами - по одному тест-классу на тег API */
 object KotlinPoetEmitter {
 
     private val restAssured = ClassName("io.restassured", "RestAssured")
@@ -81,7 +77,7 @@ object KotlinPoetEmitter {
             .build()
     }
 
-    /** Имя тест-функции без недопустимых для идентификатора символов (`/`, `{`, `}`). */
+    /** Имя тест-функции без недопустимых для идентификатора символов (`/`, `{`, `}`) */
     private fun functionName(endpoint: Endpoint): String {
         val readablePath = endpoint.path
             .replace(Regex("[/{}]"), " ")
@@ -90,7 +86,7 @@ object KotlinPoetEmitter {
         return "smoke ${endpoint.method} $readablePath".trim()
     }
 
-    /** Подставляет конкретные примеры значений вместо `{param}` в пути. */
+    /** Подставляет конкретные примеры значений вместо `{param}` в пути */
     private fun concretePath(endpoint: Endpoint): String {
         var path = endpoint.path
         endpoint.pathParameters().forEach { param ->

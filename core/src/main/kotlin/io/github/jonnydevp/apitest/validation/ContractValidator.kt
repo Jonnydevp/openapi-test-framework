@@ -4,12 +4,7 @@ import io.github.jonnydevp.apitest.execution.ApiResponse
 import io.github.jonnydevp.apitest.spec.model.Endpoint
 import io.github.jonnydevp.apitest.spec.model.ResponseSpec
 
-/**
- * Детектор расхождений между OpenAPI-спецификацией и фактическим ответом API.
- *
- * Сверяет фактический [ApiResponse] с объявленным в спецификации [ResponseSpec]:
- * статус-код, content-type, схему тела и наличие объявленных заголовков.
- */
+/** Детектор расхождений между OpenAPI-спецификацией и фактическим ответом API */
 object ContractValidator {
 
     fun validate(endpoint: Endpoint, response: ApiResponse): List<ContractMismatch> {

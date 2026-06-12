@@ -19,7 +19,7 @@ class SchemaDataGeneratorTest : StringSpec({
         pet.get("name").isTextual shouldBe true
     }
 
-    "значение enum берётся из допустимого набора" {
+    "значение enum берется из допустимого набора" {
         val pet = SchemaDataGenerator.generate(petSchema)
         pet.get("status").asText() shouldBeIn listOf("available", "pending", "sold")
     }

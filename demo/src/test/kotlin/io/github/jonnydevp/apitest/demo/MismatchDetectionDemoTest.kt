@@ -14,12 +14,7 @@ import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 
-/**
- * Демонстрация ключевой возможности — выявления расхождений между документацией и поведением.
- *
- * Мок намеренно отдаёт по `GET /pets/{petId}` тело без обязательного поля `name`.
- * Тест проверяет, что детектор это расхождение находит (тест зелёный — расхождение *ожидается*).
- */
+/** Демонстрация ключевой возможности - выявления расхождений между документацией и поведением */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class MismatchDetectionDemoTest {
 

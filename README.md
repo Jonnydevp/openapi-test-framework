@@ -17,7 +17,7 @@
 
 Kotlin 2 · JUnit 5 (`@TestFactory`) · REST Assured · Kotest (property) · swagger-parser ·
 networknt json-schema-validator · KotlinPoet (кодогенерация `.kt`) · WireMock (демо) ·
-Allure (отчёты) · GitHub Actions (CI). JVM target 17.
+Allure (отчеты) · GitHub Actions (CI). JVM target 17.
 
 ## Два режима генерации
 
@@ -40,9 +40,9 @@ framework.emit(Path.of("build/generated-tests"))
 |---------------|----------------------------------------------------------------------------|
 | `spec`        | `SpecLoader` (swagger-parser, `resolveFully`) + внутренняя модель + `SpecMapper` |
 | `data`        | `SchemaDataGenerator` (валидный пример) и `SchemaArb` (Kotest `Arb` для fuzz) |
-| `execution`   | `ApiClient` (обёртка REST Assured), `RequestDataFactory`                    |
+| `execution`   | `ApiClient` (обертка REST Assured), `RequestDataFactory`                    |
 | `generator`   | `SmokeGen` / `ContractGen` / `FuzzGen`, runtime `DynamicTestFactory`, codegen `KotlinPoetEmitter` |
-| `validation`  | `SchemaValidator`, `ContractValidator`, `MismatchReport` — детектор расхождений док↔поведение |
+| `validation`  | `SchemaValidator`, `ContractValidator`, `MismatchReport` - детектор расхождений док↔поведение |
 
 | Модуль  | Назначение                                                          |
 |---------|--------------------------------------------------------------------|
@@ -68,4 +68,4 @@ framework.emit(Path.of("build/generated-tests"))
 ## CI
 
 GitHub Actions (`.github/workflows/ci.yml`): сборка, e2e против WireMock внутри JVM (без внешней
-сети), генерация Allure-отчёта и публикация артефактов (`allure-report`, `test-reports`).
+сети), генерация Allure-отчета и публикация артефактов (`allure-report`, `test-reports`).

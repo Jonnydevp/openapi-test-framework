@@ -1,6 +1,6 @@
 package io.github.jonnydevp.apitest.validation
 
-/** Сводка найденных расхождений по результатам прогона. */
+/** Сводка найденных расхождений по результатам прогона */
 data class MismatchReport(val mismatches: List<ContractMismatch>) {
 
     val hasMismatches: Boolean get() = mismatches.isNotEmpty()
@@ -9,7 +9,7 @@ data class MismatchReport(val mismatches: List<ContractMismatch>) {
 
     fun byEndpoint(): Map<String, List<ContractMismatch>> = mismatches.groupBy { it.endpointId }
 
-    /** Человекочитаемая сводка для лога/отчёта. */
+    /** Человекочитаемая сводка для лога/отчета */
     fun render(): String {
         if (mismatches.isEmpty()) return "Расхождений док↔поведение не обнаружено."
         return buildString {

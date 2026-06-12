@@ -4,14 +4,7 @@ import io.github.jonnydevp.apitest.execution.RequestDataFactory
 import io.github.jonnydevp.apitest.spec.model.Endpoint
 import io.kotest.property.RandomSource
 
-/**
- * Fuzz-генератор (property-based): на каждый эндпоинт прогоняет [iterations] итераций со
- * случайными валидными данными из [io.github.jonnydevp.apitest.data.SchemaArb].
- *
- * Проверяемое свойство: на корректном (по схеме) входе сервис **не отвечает 5xx** —
- * то есть не падает с внутренней ошибкой. Сид [RandomSource] детерминирован по `endpoint.id`,
- * поэтому падения воспроизводимы.
- */
+/** Fuzz-генератор (property-based): на каждый эндпоинт прогоняет [iterations] итераций со случайными валидными данными из [io.github.jonnydevp.apitest.data.SchemaArb] */
 object FuzzGen : TestGenerator {
 
     const val DEFAULT_ITERATIONS: Int = 30

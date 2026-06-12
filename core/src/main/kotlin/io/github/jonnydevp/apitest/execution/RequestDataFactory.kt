@@ -8,10 +8,10 @@ import io.github.jonnydevp.apitest.spec.model.Endpoint
 import io.kotest.property.RandomSource
 import io.kotest.property.arbitrary.next
 
-/** Сборка данных запроса для эндпоинта на основе схем его параметров и тела. */
+/** Сборка данных запроса для эндпоинта на основе схем его параметров и тела */
 object RequestDataFactory {
 
-    /** Happy-path данные: все path-параметры, обязательные query/header и тело запроса. */
+    /** Happy-path данные: все path-параметры, обязательные query/header и тело запроса */
     fun valid(endpoint: Endpoint): RequestData = RequestData(
         pathParams = endpoint.pathParameters().associate { it.name to scalarFor(it) },
         queryParams = endpoint.queryParameters().filter { it.required }.associate { it.name to scalarFor(it) },
@@ -19,7 +19,7 @@ object RequestDataFactory {
         body = endpoint.requestBody?.schema?.let { SchemaDataGenerator.generate(it) },
     )
 
-    /** Случайные **валидные** данные для одной fuzz-итерации (значения берутся из [SchemaArb]). */
+    /** Случайные **валидные** данные для одной fuzz-итерации (значения берутся из [SchemaArb]) */
     fun fuzzed(endpoint: Endpoint, rs: RandomSource): RequestData = RequestData(
         pathParams = endpoint.pathParameters().associate { it.name to scalarFuzz(it, rs) },
         queryParams = endpoint.queryParameters().filter { it.required }.associate { it.name to scalarFuzz(it, rs) },

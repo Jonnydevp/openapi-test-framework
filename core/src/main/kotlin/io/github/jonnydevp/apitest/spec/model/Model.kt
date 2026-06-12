@@ -2,19 +2,13 @@ package io.github.jonnydevp.apitest.spec.model
 
 import com.fasterxml.jackson.databind.JsonNode
 
-/** HTTP-метод операции OpenAPI. */
+/** HTTP-метод операции OpenAPI */
 enum class HttpMethod { GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS }
 
-/** Расположение параметра запроса. */
+/** Расположение параметра запроса */
 enum class ParamLocation { PATH, QUERY, HEADER, COOKIE }
 
-/**
- * Узел JSON-схемы во внутреннем представлении.
- *
- * Хранит фрагмент схемы как дерево Jackson (после `resolveFully` ссылки `$ref` уже
- * подставлены). Это развязывает остальной код фреймворка от модели swagger-core и
- * позволяет переиспользовать один и тот же узел и для генерации данных, и для валидации.
- */
+/** Узел JSON-схемы во внутреннем представлении */
 data class SchemaNode(val json: JsonNode) {
     val type: String? get() = json.get("type")?.asText()
     val format: String? get() = json.get("format")?.asText()
@@ -26,7 +20,7 @@ data class SchemaNode(val json: JsonNode) {
     fun requiredProperties(): List<String> = json.get("required")?.map { it.asText() } ?: emptyList()
 }
 
-/** Параметр операции (path/query/header/cookie). */
+/** Параметр операции (path/query/header/cookie) */
 data class ApiParameter(
     val name: String,
     val location: ParamLocation,
@@ -34,14 +28,14 @@ data class ApiParameter(
     val schema: SchemaNode?,
 )
 
-/** Тело запроса операции. */
+/** Тело запроса операции */
 data class RequestBodySpec(
     val required: Boolean,
     val contentType: String,
     val schema: SchemaNode?,
 )
 
-/** Объявленный в спецификации ответ операции. */
+/** Объявленный в спецификации ответ операции */
 data class ResponseSpec(
     val statusCode: String,
     val contentType: String?,
@@ -52,7 +46,7 @@ data class ResponseSpec(
     val isSuccess: Boolean get() = statusInt?.let { it in 200..299 } ?: false
 }
 
-/** Одна операция API: метод + путь + параметры + тело + объявленные ответы. */
+/** Одна операция API: метод + путь + параметры + тело + объявленные ответы */
 data class Endpoint(
     val operationId: String,
     val method: HttpMethod,
@@ -63,7 +57,7 @@ data class Endpoint(
     val requestBody: RequestBodySpec?,
     val responses: List<ResponseSpec>,
 ) {
-    /** Стабильный человекочитаемый идентификатор, например `GET /pets/{petId}`. */
+    /** Стабильный человекочитаемый идентификатор, например `GET /pets/{petId}` */
     val id: String get() = "${method.name} $path"
 
     fun pathParameters(): List<ApiParameter> = parameters.filter { it.location == ParamLocation.PATH }
@@ -77,7 +71,7 @@ data class Endpoint(
     fun primaryTag(): String = tags.firstOrNull() ?: "default"
 }
 
-/** Внутреннее представление всей OpenAPI-спецификации. */
+/** Внутреннее представление всей OpenAPI-спецификации */
 data class ApiSpec(
     val title: String,
     val version: String,

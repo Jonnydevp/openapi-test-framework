@@ -6,12 +6,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode
 import io.github.jonnydevp.apitest.spec.model.SchemaNode
 import io.github.jonnydevp.apitest.util.nodes
 
-/**
- * Построение детерминированного **валидного** примера данных по JSON-схеме.
- *
- * Используется для smoke- и контрактных тестов, где нужен предсказуемый корректный запрос.
- * Приоритет источников значения: `example` → `default` → `enum[0]` → синтез по `type`/`format`.
- */
+/** Построение детерминированного **валидного** примера данных по JSON-схеме */
 object SchemaDataGenerator {
 
     fun generate(schema: SchemaNode): JsonNode = generate(schema.json)
@@ -98,7 +93,7 @@ object SchemaDataGenerator {
         }
     }
 
-    /** Сливает свойства из `allOf` в единую схему-объект. */
+    /** Сливает свойства из `allOf` в единую схему-объект */
     private fun mergeAllOf(allOf: JsonNode): ObjectNode {
         val merged = nodes.objectNode()
         val properties = nodes.objectNode()

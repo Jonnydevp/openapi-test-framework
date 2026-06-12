@@ -6,13 +6,7 @@ import io.restassured.RestAssured
 import io.restassured.filter.Filter
 import io.restassured.response.Response
 
-/**
- * Тонкая обёртка над REST Assured: собирает HTTP-запрос из [Endpoint] и [RequestData],
- * выполняет его и возвращает унифицированный [ApiResponse].
- *
- * @param baseUrl базовый URL тестируемого API (например, `http://localhost:8080`)
- * @param filters фильтры REST Assured (например, Allure-фильтр для attach запроса/ответа)
- */
+/** Тонкая обертка над REST Assured: собирает HTTP-запрос из [Endpoint] и [RequestData], выполняет его и возвращает унифицированный [ApiResponse] */
 class ApiClient(
     private val baseUrl: String,
     private val filters: List<Filter> = emptyList(),

@@ -8,19 +8,7 @@ import io.github.jonnydevp.apitest.spec.SpecMapper
 import io.github.jonnydevp.apitest.spec.model.ApiSpec
 import java.nio.file.Path
 
-/**
- * Единая точка входа во фреймворк.
- *
- * Объединяет оба режима генерации тестов из OpenAPI-спецификации:
- * - **runtime** — [runtime] строит JUnit 5 `DynamicTest`-ы, исполняемые «на лету»;
- * - **codegen** — [emit] эмитит готовые `.kt`-файлы с тестами.
- *
- * ```
- * val framework = ApiTestFramework.fromResource("openapi/petstore.yaml")
- * val tests = framework.runtime("http://localhost:8080").allTests() // @TestFactory
- * framework.emit(Path.of("build/generated-tests"))                   // .kt файлы
- * ```
- */
+/** Единая точка входа во фреймворк */
 class ApiTestFramework private constructor(val spec: ApiSpec) {
 
     fun runtime(baseUrl: String): DynamicTestFactory = DynamicTestFactory(spec, ApiClient(baseUrl))

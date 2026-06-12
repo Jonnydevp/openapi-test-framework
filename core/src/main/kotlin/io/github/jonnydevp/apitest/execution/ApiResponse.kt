@@ -2,7 +2,7 @@ package io.github.jonnydevp.apitest.execution
 
 import com.fasterxml.jackson.databind.JsonNode
 
-/** Унифицированное представление HTTP-ответа для валидации. */
+/** Унифицированное представление HTTP-ответа для валидации */
 data class ApiResponse(
     val statusCode: Int,
     val contentType: String?,

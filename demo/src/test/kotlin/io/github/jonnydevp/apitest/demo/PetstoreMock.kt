@@ -3,15 +3,12 @@ package io.github.jonnydevp.apitest.demo
 import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.client.WireMock
 
-/**
- * WireMock-стабы для демо-Petstore: корректные ответы по спецификации и один «сломанный»
- * для демонстрации детектора расхождений.
- */
+/** WireMock-стабы для демо-Petstore: корректные ответы по спецификации и один «сломанный» для демонстрации детектора расхождений */
 object PetstoreMock {
 
     private val PET = """{"id":1,"name":"Rex","tag":"dog","status":"available"}"""
 
-    /** Корректные ответы, полностью соответствующие спецификации. */
+    /** Корректные ответы, полностью соответствующие спецификации */
     fun stubValid(server: WireMockServer) {
         server.stubFor(
             WireMock.get(WireMock.urlPathEqualTo("/pets"))
@@ -32,10 +29,7 @@ object PetstoreMock {
         )
     }
 
-    /**
-     * Намеренное расхождение: `GET /pets/{petId}` возвращает тело **без обязательного поля
-     * `name`** — спецификация требует его, а сервис не отдаёт. Детектор обязан это поймать.
-     */
+    /** Намеренное расхождение: `GET /pets/{petId}` возвращает тело **без обязательного поля `name`** - спецификация требует его, а сервис не отдает */
     fun stubBrokenGetById(server: WireMockServer) {
         server.stubFor(
             WireMock.get(WireMock.urlPathMatching("/pets/[^/]+"))

@@ -16,12 +16,7 @@ import io.swagger.v3.oas.models.media.Content
 import io.swagger.v3.oas.models.media.Schema
 import io.swagger.v3.oas.models.parameters.Parameter
 
-/**
- * Преобразование модели swagger-core в компактную внутреннюю модель [ApiSpec].
- *
- * После этого шага остальной фреймворк не зависит от swagger-API и работает только
- * с [Endpoint]/[SchemaNode].
- */
+/** Преобразование модели swagger-core в компактную внутреннюю модель [ApiSpec] */
 object SpecMapper {
 
     fun toApiSpec(openApi: OpenAPI): ApiSpec {
