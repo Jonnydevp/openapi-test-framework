@@ -11,7 +11,7 @@
 - **smoke** - happy-path вызов каждого эндпоинта (ожидание 2xx);
 - **контрактные** - соответствие статуса, content-type, схемы тела и заголовков спецификации;
 - **fuzz (property-based)** - генерация входных данных из JSON-схем (Kotest property), свойство
-  «сервис не отвечает 5xx на валидном входе».
+  "сервис не отвечает 5xx на валидном входе"
 
 ## Стек
 
@@ -21,8 +21,8 @@ Allure (отчёты) · GitHub Actions (CI). JVM target 17.
 
 ## Два режима генерации
 
-- **runtime** — тесты строятся и исполняются «на лету» как JUnit 5 `DynamicTest` (без файлов);
-- **codegen** — фреймворк эмитит готовые читаемые `.kt`-файлы тестов (KotlinPoet).
+- **runtime** - тесты строятся и исполняются "на лету" как JUnit 5 `DynamicTest` (без файлов);
+- **codegen** - фреймворк эмитит готовые читаемые `.kt`-файлы тестов (KotlinPoet).
 
 ```kotlin
 val framework = ApiTestFramework.fromResource("openapi/petstore.yaml")
