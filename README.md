@@ -17,12 +17,12 @@
 
 Kotlin 2 · JUnit 5 (`@TestFactory`) · REST Assured · Kotest (property) · swagger-parser ·
 networknt json-schema-validator · KotlinPoet (кодогенерация `.kt`) · WireMock (демо) ·
-Allure (отчеты) · GitHub Actions (CI). JVM target 17.
+Allure (отчеты) · GitHub Actions (CI). JVM target 17
 
 ## Два режима генерации
 
 - **runtime** - тесты строятся и исполняются "на лету" как JUnit 5 `DynamicTest` (без файлов);
-- **codegen** - фреймворк эмитит готовые читаемые `.kt`-файлы тестов (KotlinPoet).
+- **codegen** - фреймворк эмитит готовые читаемые `.kt`-файлы тестов (KotlinPoet)
 
 ```kotlin
 val framework = ApiTestFramework.fromResource("openapi/petstore.yaml")
@@ -60,7 +60,7 @@ framework.emit(Path.of("build/generated-tests"))
 
 ## Детектор расхождений
 
-Демо намеренно содержит «сломанный» стаб (`GET /pets/{petId}` без обязательного поля `name`).
+Демо намеренно содержит "сломанный» стаб" (`GET /pets/{petId}` без обязательного поля `name`).
 `ContractValidator` ловит это как расхождение `BODY_SCHEMA`, что демонстрируется в
 `MismatchDetectionDemoTest`. Категории: `UNDECLARED_STATUS`, `CONTENT_TYPE`, `BODY_SCHEMA`,
 `MISSING_HEADER`.
@@ -68,4 +68,4 @@ framework.emit(Path.of("build/generated-tests"))
 ## CI
 
 GitHub Actions (`.github/workflows/ci.yml`): сборка, e2e против WireMock внутри JVM (без внешней
-сети), генерация Allure-отчета и публикация артефактов (`allure-report`, `test-reports`).
+сети), генерация Allure-отчета и публикация артефактов (`allure-report`, `test-reports`)
