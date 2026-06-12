@@ -3,6 +3,8 @@ package io.github.jonnydevp.apitest.demo
 import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration.options
 import io.github.jonnydevp.apitest.ApiTestFramework
+import io.github.jonnydevp.apitest.execution.ApiClient
+import io.qameta.allure.restassured.AllureRestAssured
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeAll
@@ -38,14 +40,17 @@ class GeneratedSuiteE2ETest {
         server.stop()
     }
 
-    @TestFactory
-    fun smoke(): List<DynamicTest> = framework.runtime(baseUrl).smokeTests()
+    /** Клиент с Allure-фильтром: каждый запрос/ответ попадает в отчёт как attachment. */
+    private fun client(): ApiClient = ApiClient(baseUrl, listOf(AllureRestAssured()))
 
     @TestFactory
-    fun contract(): List<DynamicTest> = framework.runtime(baseUrl).contractTests()
+    fun smoke(): List<DynamicTest> = framework.runtime(client()).smokeTests()
 
     @TestFactory
-    fun fuzz(): List<DynamicTest> = framework.runtime(baseUrl).fuzzTests(iterations = 20)
+    fun contract(): List<DynamicTest> = framework.runtime(client()).contractTests()
+
+    @TestFactory
+    fun fuzz(): List<DynamicTest> = framework.runtime(client()).fuzzTests(iterations = 20)
 
     @Test
     fun `codegen выпускает kt тесты в build generated-tests`() {
