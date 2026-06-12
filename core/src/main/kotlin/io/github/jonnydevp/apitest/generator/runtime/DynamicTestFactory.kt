@@ -8,11 +8,7 @@ import io.github.jonnydevp.apitest.generator.SmokeGen
 import io.github.jonnydevp.apitest.spec.model.ApiSpec
 import org.junit.jupiter.api.DynamicTest
 
-/**
- * Runtime-режим генерации: превращает сгенерированные тест-кейсы в JUnit 5 `DynamicTest`-ы,
- * которые отдаются из `@TestFactory`-метода. Тесты строятся и выполняются «на лету», без
- * генерации исходников.
- */
+/** Runtime-режим генерации: превращает сгенерированные тест-кейсы в JUnit 5 `DynamicTest`-ы, которые отдаются из `@TestFactory`-метода */
 class DynamicTestFactory(
     private val spec: ApiSpec,
     private val client: ApiClient,

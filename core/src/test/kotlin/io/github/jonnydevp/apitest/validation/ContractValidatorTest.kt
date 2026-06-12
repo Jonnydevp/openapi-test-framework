@@ -19,24 +19,24 @@ class ContractValidatorTest : StringSpec({
         return ApiResponse(status, contentType, body, json.orEmpty(), emptyMap())
     }
 
-    "корректный ответ по схеме не даёт расхождений" {
+    "корректный ответ по схеме не дает расхождений" {
         val ok = response(200, """{"id":1,"name":"Rex","status":"available"}""")
         ContractValidator.validate(getPet, ok) shouldBe emptyList()
     }
 
-    "тело без обязательного поля даёт BODY_SCHEMA" {
+    "тело без обязательного поля дает BODY_SCHEMA" {
         val bad = response(200, """{"id":1}""") // нет обязательного name
         val mismatches = ContractValidator.validate(getPet, bad)
         mismatches.map { it.type } shouldContain MismatchType.BODY_SCHEMA
     }
 
-    "неверный тип поля даёт BODY_SCHEMA" {
+    "неверный тип поля дает BODY_SCHEMA" {
         val bad = response(200, """{"id":"not-a-number","name":"Rex"}""")
         val mismatches = ContractValidator.validate(getPet, bad)
         mismatches.map { it.type } shouldContain MismatchType.BODY_SCHEMA
     }
 
-    "необъявленный статус даёт UNDECLARED_STATUS" {
+    "необъявленный статус дает UNDECLARED_STATUS" {
         val teapot = response(418, """{"x":1}""")
         val mismatches = ContractValidator.validate(getPet, teapot)
         mismatches.single().type shouldBe MismatchType.UNDECLARED_STATUS
@@ -48,7 +48,7 @@ class ContractValidatorTest : StringSpec({
         mismatches.map { it.type } shouldContain MismatchType.CONTENT_TYPE
     }
 
-    "отчёт корректно рендерится и агрегирует" {
+    "отчет корректно рендерится и агрегирует" {
         val bad = response(200, """{"id":"x"}""")
         val report = MismatchReport(ContractValidator.validate(getPet, bad))
         report.hasMismatches.shouldBeTrue()

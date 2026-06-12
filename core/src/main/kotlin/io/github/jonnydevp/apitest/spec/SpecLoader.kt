@@ -6,12 +6,7 @@ import io.swagger.v3.parser.core.models.ParseOptions
 import java.nio.file.Path
 import kotlin.io.path.readText
 
-/**
- * Загрузка и разбор OpenAPI/Swagger-спецификации (JSON или YAML) через swagger-parser.
- *
- * Используется `resolveFully`, чтобы все ссылки `$ref` были подставлены — это упрощает
- * последующую генерацию данных и валидацию: каждая схема самодостаточна.
- */
+/** Загрузка и разбор OpenAPI/Swagger-спецификации (JSON или YAML) через swagger-parser */
 object SpecLoader {
 
     private fun parseOptions(): ParseOptions = ParseOptions().apply {

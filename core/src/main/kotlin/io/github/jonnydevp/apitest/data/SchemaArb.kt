@@ -15,11 +15,7 @@ import io.kotest.property.arbitrary.map
 import io.kotest.property.arbitrary.next
 import io.kotest.property.arbitrary.string
 
-/**
- * Построение генератора [Arb] случайных **валидных** значений по JSON-схеме — основа fuzz-тестов
- * (property-based). Каждое значение уважает `type`, `enum` и числовые/строковые ограничения схемы,
- * поэтому подходит для проверки «сервис не должен падать 5xx на валидном входе».
- */
+/** Построение генератора [Arb] случайных **валидных** значений по JSON-схеме - основа fuzz-тестов (property-based) */
 object SchemaArb {
 
     fun fromSchema(schema: SchemaNode): Arb<JsonNode> = build(schema.json)

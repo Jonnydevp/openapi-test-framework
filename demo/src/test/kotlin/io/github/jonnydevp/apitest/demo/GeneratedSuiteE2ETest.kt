@@ -15,10 +15,7 @@ import org.junit.jupiter.api.TestInstance
 import java.nio.file.Path
 import kotlin.io.path.readText
 
-/**
- * Сквозной прогон сгенерированных тестов против корректного WireMock-мока Petstore.
- * Демонстрирует runtime-режим (smoke/contract/fuzz через `@TestFactory`) и codegen-режим.
- */
+/** Сквозной прогон сгенерированных тестов против корректного WireMock-мока Petstore */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class GeneratedSuiteE2ETest {
 
@@ -40,7 +37,7 @@ class GeneratedSuiteE2ETest {
         server.stop()
     }
 
-    /** Клиент с Allure-фильтром: каждый запрос/ответ попадает в отчёт как attachment. */
+    /** Клиент с Allure-фильтром: каждый запрос/ответ попадает в отчет как attachment */
     private fun client(): ApiClient = ApiClient(baseUrl, listOf(AllureRestAssured()))
 
     @TestFactory
