@@ -5,12 +5,12 @@
 Фреймворк для **автоматической генерации тестов REST API** на основе OpenAPI-спецификации.
 
 Курсовая работа. Инструмент анализирует OpenAPI/Swagger-спецификацию и автоматически
-порождает набор тестов трёх видов, а также выявляет расхождения между документацией
+порождает набор тестов трех видов, а также выявляет расхождения между документацией
 и фактическим поведением API:
 
-- **smoke** — happy-path вызов каждого эндпоинта (ожидание 2xx);
-- **контрактные** — соответствие статуса, content-type, схемы тела и заголовков спецификации;
-- **fuzz (property-based)** — генерация входных данных из JSON-схем (Kotest property), свойство
+- **smoke** - happy-path вызов каждого эндпоинта (ожидание 2xx);
+- **контрактные** - соответствие статуса, content-type, схемы тела и заголовков спецификации;
+- **fuzz (property-based)** - генерация входных данных из JSON-схем (Kotest property), свойство
   «сервис не отвечает 5xx на валидном входе».
 
 ## Стек
@@ -54,8 +54,8 @@ framework.emit(Path.of("build/generated-tests"))
 ```bash
 ./gradlew build                      # компиляция + юнит-тесты core + e2e demo
 ./gradlew :demo:test                 # только e2e против WireMock-мока
-./gradlew allureReport               # сгенерировать Allure-отчёт (demo/build/reports/allure-report)
-./gradlew allureServe                # открыть Allure-отчёт в браузере
+./gradlew allureReport               # сгенерировать Allure-отчет (demo/build/reports/allure-report)
+./gradlew allureServe                # открыть Allure-отчет в браузере
 ```
 
 ## Детектор расхождений
